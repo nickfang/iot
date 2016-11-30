@@ -1,5 +1,6 @@
 const TIME_COLOR = "#FFFFFF";
-const IAN_COLOR = "#FF0000"
+const IAN_COLOR = "#00FF00";
+const DIM_COLOR = "#222222";
 
 function getCurrentTime(){
 	var d = new Date();
@@ -89,7 +90,7 @@ function clearStyle() {
 
 	elements = document.querySelectorAll('.time');
 	for (var i = 0; i < elements.length; i++) {
-		elements[i].style.color = "#EEEEEE";
+		elements[i].style.color = DIM_COLOR;
 	}
 }
 
@@ -131,14 +132,7 @@ function buttonPress(e) {
 	}
 }
 
-// var time = getCurrentTime();
-// console.log(time.hours);
-// console.log(time.minutes);
-
-// clearStyle();
 decodeTime();
-
 
 // testGetMinutes();
 // testGetHours();
-// testGetMinutes();
