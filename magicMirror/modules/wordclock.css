@@ -1,9 +1,13 @@
+body {
+	background: black
+}
+
 .word-clock-div {
 	text-align: center;
 	font-family: courier;
 	font-size: xx-large;
 	font-stretch: expanded;
-	color: #EEEEEE;
+	color: #222222;
 	letter-spacing: 20px;
 }
 

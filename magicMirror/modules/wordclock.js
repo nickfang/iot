@@ -1,4 +1,4 @@
-const TIME_COLOR = "#000000";
+const TIME_COLOR = "#FFFFFF";
 const IAN_COLOR = "#FF0000"
 
 function getCurrentTime(){
