@@ -1,5 +1,4 @@
-<!--//http://www.timeanddate.com/wordclock/
-
+<!--
 ITIISANAHALF
 LTWENTYEFIVE
 QUARTERXTENA
@@ -14,19 +13,31 @@ RFANO'CLOCKG
 <html>
 	<head>
 		<link type="text/css" rel="stylesheet" href="wordclock.css"/>
+		<meta http-equiv="refresh" content="60">
 	</head>
 	<body>
 		<div class="word-clock-div">
-			<span id="it">IT</span><span id="ian">I</span><span id="is">IS</span><span id="ian">AN</span><span id="ian_a">A</span><span id="min30">HALF</span><br>
-			<span id="ian">L</span><span id="min20">TWENTY</span><span id="ian">E</span><span = id="min5">FIVE</span><br>
-			<span id="ian">A</span><span id="min15">QUARTER</span><span id="ian">X</span><span id="min10">TEN</span><span id="ian">A</span><br>
-			<span id="to">TO</span><span id="past">PAST</span><span id="hour1">ONE</span><span id="ian">X</span><span id="hour2">TWO</span><br>
-			<span id="ian">N</span><span id="hour3">THREE</span><span id="ian">DE</span><span id="hour4">FOUR</span><br>
-			<span id="hour5">FIVE</span><span id="hour6">SIX</span><span id="hour7">SEVEN</span><br>
-			<span id="hour8">EIGHT</span><span id="hour9">NINE</span><span id="hour10">TEN</span><br>
-			<span id="hour11">ELEVEN</span><span id="hour0">TWELVE</span><br>
-			<span id="ian">RFAN</span><span id="oclock">O'CLOCK</span><span id="ian">G</span><br>
+			<span class="time" id="it">IT</span><span class="name">I</span><span class="time" id="is">IS</span><span class="name">AN</span><span class="time ian" id="a">A</span><span class="time" id="min30">HALF</span>
+			<br>
+			<span class="name">L</span><span class="time" id="min20">TWENTY</span><span class="name">E</span><span = class="time" id="min5">FIVE</span>
+			<br>
+			<span class="time" id="min15">QUARTER</span><span class="name">X</span><span class="time" id="min10">TEN</span><span class="name">A</span>
+			<br>
+			<span class="time" id="to">TO</span><span class="time" id="past">PAST</span><span class="time" id="hour1">ONE</span><span class="time" id="hour2">TWO</span>
+			<br>
+			<span class="name">N</span><span class="time" id="hour3">THREE</span><span class="name">DE</span><span class="time" id="hour4">FOUR</span>
+			<br>
+			<span class="time" id="hour5">FIVE</span><span class="time" id="hour6">SIX</span><span class="time" id="hour7">SEVEN</span>
+			<br>
+			<span class="time" id="hour8">EIGHT</span><span class="time" id="hour9">NINE</span><span class="time" id="hour10">TEN</span>
+			<br>
+			<span class="time" id="hour11">ELEVEN</span><span class="time" id="hour0">TWELVE</span>
+			<br>
+			<span class="name">RFAN</span><span class="time" id="oclock">O'CLOCK</span><span class="name">G</span>
+			<br>
 		</div>
+		<div>	<br><br><button name"ian" onmouseup="buttonPress(event)">Name</button> </div>
+
 		<script src="wordclock.js"></script>
 	</body>
 </html>

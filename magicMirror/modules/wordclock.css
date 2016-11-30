@@ -1,4 +1,12 @@
 .word-clock-div {
+	text-align: center;
 	font-family: courier;
+	font-size: xx-large;
+	font-stretch: expanded;
+	color: #EEEEEE;
+	letter-spacing: 20px;
+}
+
+.ian-on {
 	color: #EEEEEE;
 }
