@@ -25,6 +25,7 @@ function decodeTime() {
 	getHour(hour);
 }
 
+// 11:00 doesn't work.
 function getMinute(minute) {
 	// special case since the equation used in the switch case will put 0 in the five past case.
 	var ids = [];
@@ -32,7 +33,7 @@ function getMinute(minute) {
 
 	// special case so that if minutes are 0, it won't fall into case 0.
 	if (minute == 0) {
-		ids = ["o'clock"];
+		ids = ["oclock"];
 	} else {
 		switch(((minute-1)/5)|0) {
 			case 0:
@@ -76,6 +77,7 @@ function getMinute(minute) {
 		}
 	}
 	for (var i=0; i < ids.length; i++) {
+		console.log(ids);
 		document.getElementById(ids[i]).style.color=TIME_COLOR;
 	}
 }
@@ -133,6 +135,7 @@ function buttonPress(e) {
 }
 
 decodeTime();
+
 
 // testGetMinutes();
 // testGetHours();
