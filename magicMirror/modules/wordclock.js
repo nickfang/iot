@@ -77,7 +77,6 @@ function getMinute(minute) {
 		}
 	}
 	for (var i=0; i < ids.length; i++) {
-		console.log(ids);
 		document.getElementById(ids[i]).style.color=TIME_COLOR;
 	}
 }
@@ -135,6 +134,8 @@ function buttonPress(e) {
 }
 
 decodeTime();
+// getMinute(0);
+// getHour(4);
 
 
 // testGetMinutes();
