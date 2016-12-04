@@ -25,56 +25,28 @@ function decodeTime() {
 	getHour(hour);
 }
 
-// 11:00 doesn't work.
 function getMinute(minute) {
-	// special case since the equation used in the switch case will put 0 in the five past case.
+	var clockIds = {
+		"0": ["min5","past"],
+		"1": ["min10", "past"],
+		"2": ["min15", "a", "past"],
+		"3": ["min20", "past"],
+		"4": ["min20", "min5", "past"],
+		"5": ["min30", "past"],
+		"6": ["min20", "min5", "to"],
+		"7": ["min20", "to"],
+		"8": ["min15", "a", "to"],
+		"9": ["min10","to"],
+		"10": ["min5","to"],
+		"11": ["oclock"]
+	};
 	var ids = [];
-	var i;
 
-	// special case so that if minutes are 0, it won't fall into case 0.
-	if (minute == 0) {
+	// special case since the equation to find ids will put 0 minutes into min5 index.
+	if (minute === 0) {
 		ids = ["oclock"];
 	} else {
-		switch(((minute-1)/5)|0) {
-			case 0:
-				ids = ["min5","past"];
-				break;
-			case 1:
-				ids = ["min10", "past"];
-				break;
-			case 2:
-				ids = ["min15", "a", "past"];
-				break;
-			case 3:
-				ids = ["min20", "past"];
-				break;
-			case 4:
-				ids = ["min20", "min5", "past"];
-				break;
-			case 5:
-				ids = ["min30", "past"];
-				break;
-			case 6:
-				ids = ["min20", "min5", "to"];
-				break;
-			case 7:
-				ids = ["min20", "to"];
-				break;
-			case 8:
-				ids = ["min15", "a", "to"];
-				break;
-			case 9:
-				ids = ["min10","to"];
-				break;
-			case 10:
-				ids = ["min5","to"];
-				break;
-			case 11:
-				ids = ["oclock"];
-				break;
-			default:
-				console.log(minute + ": default - THIS IS WRONG!!!");
-		}
+		ids = clockIds[Math.floor((minute-1)/5)];
 	}
 	for (var i=0; i < ids.length; i++) {
 		document.getElementById(ids[i]).style.color=TIME_COLOR;
