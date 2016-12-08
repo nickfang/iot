@@ -16,8 +16,8 @@ function decodeTime() {
 	var minute = time.minutes;
 	var hour = time.hours;
 
-	document.getElementById("it").style.color=TIME_COLOR;
-	document.getElementById("is").style.color=TIME_COLOR;
+	// document.getElementById("it").style.color=TIME_COLOR;
+	// document.getElementById("is").style.color=TIME_COLOR;
 	getMinute(minute);
 	if (minute > 30) {
 		hour++;
@@ -48,6 +48,8 @@ function getMinute(minute) {
 	} else {
 		ids = clockIds[Math.floor((minute-1)/5)];
 	}
+	ids.push("it");
+	ids.push("is");
 	for (var i=0; i < ids.length; i++) {
 		document.getElementById(ids[i]).style.color=TIME_COLOR;
 	}
