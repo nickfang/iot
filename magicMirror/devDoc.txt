@@ -1,11 +1,14 @@
 MagicMirror
 
+
+
 Modules
 	Word Clock
-		create magicmirror.html.
-		create corresponding css file.
-		make all the words a class that is light gray.
-		make each minute element an id that is set by javascript.
-		make each hour element an id that is set by javascript.
-		make an id for "IAN ALEXANDER FANG"
+		-create magicmirror.html.
+		-create corresponding css file.
+		-make all the words a class that is light gray.
+		-make each minute element an id that is set by javascript.
+		-make each hour element an id that is set by javascript.
+		-make an id for "IAN ALEXANDER FANG"
 
+		What is a non-live element - a copy of the element state at the time of getting it.

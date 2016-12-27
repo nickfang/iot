@@ -33,7 +33,7 @@ function decodeTime() {
 	ids.push("it");
 	ids.push("is");
 
-	// special case since the equation to find ids will put 0 minutes into min5 index.
+	// special case since the equation to find ids will put 0 minutes into index 0 of clockIds.
 	if (time.minute === 0) {
 		ids.push("oclock");
 	} else {
@@ -42,6 +42,7 @@ function decodeTime() {
 	if (time.minute > 30) {
 		time.hour++;
 	}
+
 	ids.push("hour" + String(time.hour%12));
 
 	// set the appropriate id's to display the time.
