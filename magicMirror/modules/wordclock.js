@@ -14,11 +14,11 @@ function getCurrentTime(){
 function decodeTime() {
 	const time = getCurrentTime();
 
-	console.log(time.hour + ":" + time.minute, time.minute % 5 === 1, timeUpdated === false);
+	// console.log(time.hour + ":" + time.minute, time.minute % 5 === 1, timeUpdated === false);
 	// update the time at [1,6,11,16,21,26,31,36,41,46,51,56] after the hour.
 	if ((time.minute % 5 === 1) && (timeUpdated === false)) {
 		setNewTime(time);
-		console.log("Updated time at: " + time.hour + ":" + time.minute);
+		// console.log("Updated time at: " + time.hour + ":" + time.minute);
 		timeUpdated = true;
 	}
 	if (time.minute % 5 === 2) {
