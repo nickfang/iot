@@ -13,7 +13,8 @@ RFANO'CLOCKG
 <html>
 	<head>
 		<link type="text/css" rel="stylesheet" href="wordclock.css"/>
-		<meta http-equiv="refresh" content="60">
+
+		<!-- This refreshes the whole page.  Using setInterval instead to only run one function every second. <meta http-equiv="refresh" content="60"> -->
 	</head>
 	<body>
 		<div class="word-clock-div">
@@ -27,7 +28,7 @@ RFANO'CLOCKG
 			<span class="time" id="hour11">ELEVEN</span><span class="time" id="hour0">TWELVE</span><br>
 			<span class="name">RFAN</span><span class="time" id="oclock">O'CLOCK</span><span class="name">G</span><br>
 		</div>
-		<div>	<br><br><button name"ian" onmouseup="buttonPress(event)">Name</button> </div>
+		<div>	<br><br><button name"ian">Name</button> </div>
 		<script src="wordclock.js"></script>
 	</body>
 </html>

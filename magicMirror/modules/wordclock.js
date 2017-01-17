@@ -1,9 +1,9 @@
-const TIME_COLOR = "#FFFFFF";
-const IAN_COLOR = "#00FF00";
-const DIM_COLOR = "#222222";
+const button = document.querySelector('button');
+const clock = setInterval(function() { decodeTime() }, 1000);
+let timeUpdated = false;
 
 function getCurrentTime(){
-	var d = new Date();
+	const d = new Date();
 	return { "hour": d.getHours(), "minute": d.getMinutes() };
 }
 
@@ -12,7 +12,23 @@ function getCurrentTime(){
 // It is better to think it is later than it actually is so you're more likely to be somewhere on time.
 // 1-5 is five past, 6-10 is ten past, 11-15 is quarter past, etc.  56-0 is o'clock
 function decodeTime() {
-	var clockIds = {
+	const time = getCurrentTime();
+
+	console.log(time.hour + ":" + time.minute, time.minute % 5 === 1, timeUpdated === false);
+	// update the time at [1,6,11,16,21,26,31,36,41,46,51,56] after the hour.
+	if ((time.minute % 5 === 1) && (timeUpdated === false)) {
+		setNewTime(time);
+		console.log("Updated time at: " + time.hour + ":" + time.minute);
+		timeUpdated = true;
+	}
+	if (time.minute % 5 === 2) {
+		timeUpdated = false;
+	}
+}
+
+function setNewTime(time) {
+	console.log('setNewTime');
+	const clockIds = {
 		"0": ["min5","past"],
 		"1": ["min10", "past"],
 		"2": ["min15", "a", "past"],
@@ -26,13 +42,11 @@ function decodeTime() {
 		"10": ["min5","to"],
 		"11": ["oclock"]
 	};
-	var ids = [];
-	var time = getCurrentTime();
-	var index = Math.floor((time.minute-1)/5);
+	const index = Math.floor((time.minute-1)/5);
+	let ids = [];
 
 	ids.push("it");
 	ids.push("is");
-
 	// special case since the equation to find ids will put 0 minutes into index 0 of clockIds.
 	if (time.minute === 0) {
 		ids.push("oclock");
@@ -42,48 +56,45 @@ function decodeTime() {
 	if (time.minute > 30) {
 		time.hour++;
 	}
-
 	ids.push("hour" + String(time.hour%12));
 
-	// set the appropriate id's to display the time.
+	clearStyle();
+	// add class to turn on the appropriate id's to display the time.
 	for (var i=0; i < ids.length; i++) {
-		document.getElementById(ids[i]).style.color=TIME_COLOR;
+		document.getElementById(ids[i]).classList.add('word-on');
 	}
 }
 
 function clearStyle() {
-	var elements;
+	let elements;
 
+	// clear everything by removing all classes the change the word color.
 	elements = document.querySelectorAll('.time');
 	for (var i = 0; i < elements.length; i++) {
-		elements[i].style.color = DIM_COLOR;
+		elements[i].classList.remove('word-on');
+	}
+	elements = document.querySelectorAll('.name');
+	for (var i = 0; i < elements.length; i++) {
+		elements[i].classList.remove('ian-on');
 	}
 }
 
 function buttonPress(e) {
-	var e = e || window.event;
-	var btnCode;
-	var elements;
+	let elements;
 
+	console.log('buttonPress' + e);
 	clearStyle();
 
-	if ('object' === typeof e) {
-		btnCode = e.button;
-
-		switch(btnCode) {
-			case 0:
-			case 1:
-			case 2:
-				elements = document.querySelectorAll('.name');
-				for (var i = 0; i < elements.length; i++) {
-					elements[i].style.color = IAN_COLOR;
-				}
-				// .style.color = IAN_COLOR;
-				break;
-			default:
-				console.log("Unexpected code: " + btnCode);
-		}
+	elements = document.querySelectorAll('.name');
+	for (var i = 0; i < elements.length; i++) {
+		elements[i].classList.add('ian-on');
 	}
+
+	// only code within the setTimeout will be run after the timeout.
+	// has to be in an anonymous function or the code will run right away.
+	// code after the settimeout will run right away.
+	setTimeout( () => setNewTime(getCurrentTime()), 10000);
+
 }
 
 function testGetMinutes() {
@@ -94,4 +105,5 @@ function testGetHours() {
 	// figure out a way to test that the hour id is set correctly
 }
 
-decodeTime();
+document.addEventListener('DOMContentLoaded', setNewTime(getCurrentTime()));
+button.addEventListener('mouseup', buttonPress);
