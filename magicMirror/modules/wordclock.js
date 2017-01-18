@@ -27,7 +27,6 @@ function decodeTime() {
 }
 
 function setNewTime(time) {
-	console.log('setNewTime');
 	const clockIds = {
 		"0": ["min5","past"],
 		"1": ["min10", "past"],
@@ -45,8 +44,10 @@ function setNewTime(time) {
 	const index = Math.floor((time.minute-1)/5);
 	let ids = [];
 
-	ids.push("it");
-	ids.push("is");
+	clearStyle();
+
+	document.getElementById("it").classList.add('word-on');
+	document.getElementById("is").classList.add('word-on');
 	// special case since the equation to find ids will put 0 minutes into index 0 of clockIds.
 	if (time.minute === 0) {
 		ids.push("oclock");
@@ -58,25 +59,19 @@ function setNewTime(time) {
 	}
 	ids.push("hour" + String(time.hour%12));
 
-	clearStyle();
 	// add class to turn on the appropriate id's to display the time.
-	for (var i=0; i < ids.length; i++) {
-		document.getElementById(ids[i]).classList.add('word-on');
-	}
+	ids.forEach( (id) => document.getElementById(id).classList.add('word-on'));
 }
 
 function clearStyle() {
 	let elements;
 
 	// clear everything by removing all classes the change the word color.
-	elements = document.querySelectorAll('.time');
-	for (var i = 0; i < elements.length; i++) {
-		elements[i].classList.remove('word-on');
-	}
-	elements = document.querySelectorAll('.name');
-	for (var i = 0; i < elements.length; i++) {
-		elements[i].classList.remove('ian-on');
-	}
+	elements = document.querySelectorAll('span.time, span.name');
+	elements.forEach( (element) => {
+		element.classList.remove('word-on');
+		element.classList.remove('ian-on');
+	});
 }
 
 function buttonPress(e) {
@@ -86,9 +81,7 @@ function buttonPress(e) {
 	clearStyle();
 
 	elements = document.querySelectorAll('.name');
-	for (var i = 0; i < elements.length; i++) {
-		elements[i].classList.add('ian-on');
-	}
+	elements.forEach( (element) => element.classList.add('ian-on'));
 
 	// only code within the setTimeout will be run after the timeout.
 	// has to be in an anonymous function or the code will run right away.
