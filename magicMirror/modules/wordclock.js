@@ -1,5 +1,5 @@
 const button = document.querySelector('button');
-const clock = setInterval(function() { decodeTime() }, 1000);
+const clock = setInterval(decodeTime, 1000);
 let timeUpdated = false;
 
 function getCurrentTime(){
@@ -77,17 +77,15 @@ function clearStyle() {
 function buttonPress(e) {
 	let elements;
 
-	console.log('buttonPress' + e);
 	clearStyle();
-
 	elements = document.querySelectorAll('.name');
 	elements.forEach( (element) => element.classList.add('ian-on'));
 
 	// only code within the setTimeout will be run after the timeout.
-	// has to be in an anonymous function or the code will run right away.
 	// code after the settimeout will run right away.
-	setTimeout( () => setNewTime(getCurrentTime()), 10000);
-
+	setTimeout(setNewTime, 10000, getCurrentTime());
+	// another way to do it
+	// setTimeout( () => setNewTime(getCurrentTime()), 10000);
 }
 
 function testGetMinutes() {
