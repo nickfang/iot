@@ -1,3 +1,4 @@
 #.gitignore for IoT.git repository
 examples
+node_modules
 certs/
