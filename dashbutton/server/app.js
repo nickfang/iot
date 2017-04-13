@@ -19,13 +19,13 @@ let server = serverEvent({ express: app });
 
 app.get("/", (req, res) => {
    res.sendFile("dash.html");
-	dash.on("detected", () => {
-	   console.log("Button press detected, now figure out something for me to do!");
-	   count++;
-	   // send event
-	   server(req, res);
-	   res.sse('buttonCount', `Button press #: ${count}`);
-	});
+	// dash.on("detected", () => {
+	//    console.log("Button press detected, now figure out something for me to do!");
+	//    count++;
+	//    // send event
+	//    server(req, res);
+	//    res.sse('buttonCount', `Button press #: ${count}`);
+	// });
 });
 
 app.listen(port, (err) => {
