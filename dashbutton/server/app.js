@@ -1,3 +1,5 @@
+"use strict";
+
 const express    = require("express");
 const dashButton = require("node-dash-button");
 const serverEvent = require("server-event");
@@ -11,9 +13,9 @@ let count = 0;
 // iface
 // 10 second delay before looking for another button push
 // use both arp and udp protocol
-var dash = dashButton("68:54:fd:72:f4:74", null, 10000, 'all');
+let dash = dashButton("68:54:fd:72:f4:74", null, 10000, 'all');
 
-serverEvent = serverEvent({ express: app });
+let server = serverEvent({ express: app });
 
 app.get("/", (req, res) => {
    res.sendFile("dash.html");
@@ -21,7 +23,7 @@ app.get("/", (req, res) => {
 	   console.log("Button press detected, now figure out something for me to do!");
 	   count++;
 	   // send event
-	   serverEvent(req, res);
+	   server(req, res);
 	   res.sse('buttonCount', `Button press #: ${count}`);
 	});
 });
