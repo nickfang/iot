@@ -2,8 +2,18 @@
 <html>
 <head>
 	<title>Dash Button Console.</title>
+
 </head>
 <body>
 	<h1>Dash Button Console.</h1>
+	<script type="text/javascript" src="http://localost:3000/sse.js"></script>
+	<script type="text/javascript">
+		var sse = new ServerSentEvent("events");
+
+		sse.on("buttonCount", (data) => {
+			console.log("buttonCount: ", data);
+		});
+	</script>
 </body>
+
 </html>
