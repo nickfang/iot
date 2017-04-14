@@ -15,17 +15,18 @@ let count = 0;
 // use both arp and udp protocol
 let dash = dashButton("68:54:fd:72:f4:74", null, 10000, 'all');
 
-let server = serverEvent({ express: app });
+// let server = serverEvent({ express: app });
 
 app.get("/", (req, res) => {
    res.sendFile("dash.html");
-	// dash.on("detected", () => {
-	//    console.log("Button press detected, now figure out something for me to do!");
-	//    count++;
-	//    // send event
-	//    server(req, res);
-	//    res.sse('buttonCount', `Button press #: ${count}`);
-	// });
+        dash.on("detected", () => {
+           console.log("Button press detected, now figure out something for me to do!");
+           count++;
+           // send event
+//         server(req, res);
+//         res.sse('buttonCount', `Button press #: ${count}`);
+        });
+        res.redirect("/dash.html");
 });
 
 app.listen(port, (err) => {
@@ -34,4 +35,3 @@ app.listen(port, (err) => {
    }
    console.log(`Server is listening on ${port}`);
 });
-
