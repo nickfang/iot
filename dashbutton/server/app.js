@@ -1,13 +1,15 @@
 "use strict";
 
-const express    = require("express");
 const dashButton = require("node-dash-button");
-const serverEvent = require("server-event");
+const path = require("path");
 
-const app        = express();
 const port       = 3000;
+var app         = require("express")();
+var serverEvent = require("server-event");
 
 let count = 0;
+
+serverEvent = serverEvent({ express: app, retry: 3000 });
 
 // dang button mac address: 68:54:fd:72:f4:74
 // iface
@@ -15,17 +17,15 @@ let count = 0;
 // use both arp and udp protocol
 let dash = dashButton("68:54:fd:72:f4:74", null, 10000, 'all');
 
-let server = serverEvent({ express: app });
-
 app.get("/", (req, res) => {
-   res.sendFile(path.joing(__dirname, "dash.html" ));
-	dash.on("detected", () => {
-	  	console.log("Button press detected, now figure out something for me to do!");
-	  	count++;
-	  	// send event
-	  	server(req, res);
-	  	res.sse('buttonCount', `Button press #: ${count}`);
-	});
+   serverEvent(req, res);
+   res.sendFile(path.join(__dirname, "dash.html" ));
+   dash.on("detected", () => {
+      console.log("Button press detected, now figure out something for me to do!");
+      count++;
+      // send event
+      res.sse('buttonCount', `Button press #: ${count}`);
+   });
 });
 
 app.listen(port, (err) => {
