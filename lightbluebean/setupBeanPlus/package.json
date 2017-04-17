@@ -1,0 +1,15 @@
+{
+  "name": "setupbeanplus",
+  "version": "1.0.0",
+  "description": "Setting up the build environment for the light blue bean plus.  The instructions say to run npm install --global --production windows-build-tools, but I'm going to try installing it locally first.",
+  "main": "bean.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bean-sdk": "^0.6.2",
+    "windows-build-tools": "^1.2.1"
+  }
+}
