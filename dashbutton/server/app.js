@@ -19,6 +19,7 @@ let dash = dashButton("68:54:fd:72:f4:74", null, 10000, 'all');
 
 app.get("/", (req, res) => {
    serverEvent(req, res);
+   res.setHeader('Content-Type', 'text/html');
    res.send(path.join(__dirname, "dash.html" ));
    dash.on("detected", () => {
       count++;
