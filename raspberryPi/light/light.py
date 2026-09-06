@@ -1,31 +1,39 @@
-import subprocess
-from flask import Flask
 import RPi.GPIO as GPIO
-import atexit
+import time
 
-PIN_RELAY_1_DEFAULT = 14
-PIN_RELAY_2_DEFAULT = 15
+DEFAULT_PIN_RELAY_1 = 14
+DEFAULT_PIN_RELAY_2 = 15
+DEFAULT_SECONDS = 300
+ON, OFF = GPIO.LOW, GPIO.HIGH
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(PIN_RELAY_1_DEFAULT, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(PIN_RELAY_2_DEFAULT, GPIO.OUT, initial=GPIO.LOW)
 
-app = Flask(__name__)
+def setup():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(DEFAULT_PIN_RELAY_1, GPIO.OUT, initial=OFF)
+    GPIO.setup(DEFAULT_PIN_RELAY_2, GPIO.OUT, initial=OFF)
 
-@app.route("/health")
-def health():
-    return "<h1>Healthy!</h1>\n"
-@app.route("/")
-def onoff():
-    subprocess.run(["python", "turn_on_and_off.py", "--pin1", PIN_RELAY_1_DEFAULT, "--pin2", PIN_RELAY_2_DEFAULT])
-    return "<h1>Light done.</h1>\n"
-@app.route("/on")
-def on():
-    subprocess.run(["python", "turn_on.py", "--pin1", PIN_RELAY_1_DEFAULT, "--pin2", PIN_RELAY_2_DEFAULT])
-    return "<h1>Light On.</h1>\n"
-@app.route("/off")
-def off():
-    subprocess.run(["python", "turn_off.py", "--pin1", PIN_RELAY_1_DEFAULT, "--pin2", PIN_RELAY_2_DEFAULT])
-    return "<h1>Light Off.</h1>\n"
+def on(pin=DEFAULT_PIN_RELAY_1):
+    GPIO.output(pin, ON)
 
-atexit.register(GPIO.cleanup)
+def off(pin=DEFAULT_PIN_RELAY_1):
+    GPIO.output(pin, OFF)
+
+def toggle_with_delay(pin=DEFAULT_PIN_RELAY_1, start=ON, delay=DEFAULT_SECONDS):
+    print("Start toggle.", "ON" if start == ON else OFF)
+    GPIO.output(pin, start)
+    print("Start delay.", delay)
+    time.sleep(delay)
+    print("End delay.")
+    GPIO.output(pin, OFF if start == ON else ON)
+    print("End toggle.", "OFF" if start == ON else ON)
+        
+def cleanup(pin=DEFAULT_PIN_RELAY_1):
+    GPIO.output(pin, OFF)
+    GPIO.cleanup(pin)
+
+if __name__ == "__main__":
+    pin = 14
+    delay = 10
+    toggle_with_delay(pin, ON, delay)
+    cleanup(pin)
+
